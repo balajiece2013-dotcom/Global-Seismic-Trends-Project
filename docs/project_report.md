@@ -62,3 +62,5 @@ Building a Streamlit dashboard
 Writing documentation
 
 The project requirements are fully satisfied
+
+Project finalized and ready for GitHub submission.
