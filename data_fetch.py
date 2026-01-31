@@ -6,8 +6,9 @@ BASE_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query"
 
 all_records = []
 
-for year in range(2024, 2025):          # TEMP: 1 year test
-    for month in range(1, 4):            # TEMP: 3 months test
+# 5 years loop (2020–2024 example)
+for year in range(2020, 2025):          # 2020,2021,2022,2023,2024
+    for month in range(1, 13):          # All 12 months
 
         start_date = f"{year}-{month:02d}-01"
 
@@ -25,18 +26,21 @@ for year in range(2024, 2025):          # TEMP: 1 year test
 
         print(f"Fetching {start_date}", flush=True)
 
-        response = requests.get(BASE_URL, params=params, timeout=30)
+        try:
+            response = requests.get(BASE_URL, params=params, timeout=30)
+        except Exception as e:
+            print("Request error:", e)
+            continue
 
         if response.status_code != 200 or response.text.strip() == "":
             print("API error, skipping...")
             continue
 
         data = response.json()
-        features = data.get("features", [])   # ✅ defined HERE
+        features = data.get("features", [])
 
         print("Records:", len(features))
 
-        # ✅ USE features INSIDE SAME BLOCK
         for f in features:
             props = f["properties"]
             geom = f["geometry"]
@@ -77,5 +81,6 @@ print("Total records:", len(all_records))
 df = pd.DataFrame(all_records)
 print(df.head())
 
-df.to_csv("earthquakes_test.csv", index=False)
+df.to_csv("earthquakes_5years.csv", index=False)
 print("CSV saved")
+
