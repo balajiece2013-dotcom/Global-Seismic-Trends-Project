@@ -7,7 +7,7 @@ df["year"] = df["time"].dt.year.astype(int)
 df["month"] = df["time"].dt.month
 df["country"] = df["place"].str.extract(r",\s*([A-Za-z\s]+)$")
 
-st.title("🌍 Global Seismic Trends Dashboard")
+st.title("Global Seismic Trends Dashboard")
 
 year = st.selectbox("Select Year", sorted(df["year"].unique()))
 country = st.selectbox("Select Country", sorted(df["country"].dropna().unique()))
@@ -16,7 +16,7 @@ country = st.selectbox("Select Country", sorted(df["country"].dropna().unique())
 filtered = df[(df["year"] == year) & (df["country"] == country)]
 
 if filtered.empty:
-    st.warning("⚠️ No earthquake records found for this selection.")
+    st.warning("No earthquake records found for this selection.")
 else:
     st.subheader("Earthquake Locations")
     st.map(filtered[["latitude", "longitude"]])
