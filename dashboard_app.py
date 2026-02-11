@@ -8,7 +8,10 @@ df["year"] = df["time"].dt.year.astype(int)
 df["month"] = df["time"].dt.month
 df["country"] = df["place"].str.extract(r",\s*([A-Za-z\s]+)$")
 
-st.title("Global Seismic Trends Dashboard")
+st.sidebar.title("Project Info")
+st.sidebar.write("Global Seismic Trends Dashboard")
+st.sidebar.write("Built with Python, Pandas, SQL, Streamlit")
+st.sidebar.write("Data Source: USGS Earthquake API")
 
 st.header("📊 Year & Country Analysis")
 
