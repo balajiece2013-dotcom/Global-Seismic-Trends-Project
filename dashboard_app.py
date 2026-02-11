@@ -12,6 +12,7 @@ st.sidebar.title("Project Info")
 st.sidebar.write("Global Seismic Trends Dashboard")
 st.sidebar.write("Built with Python, Pandas, SQL, Streamlit")
 st.sidebar.write("Data Source: USGS Earthquake API")
+st.sidebar.write("Developed by: Balaji Venkatesan")
 
 st.header("📊 Year & Country Analysis")
 
