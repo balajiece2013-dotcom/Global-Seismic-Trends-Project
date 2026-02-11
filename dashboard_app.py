@@ -13,6 +13,8 @@ st.sidebar.markdown("<b style='color:green;'>Global Seismic Trends Dashboard</b>
 st.sidebar.markdown("<b style='color:purple;'>Built with Python, Pandas, SQL, Streamlit</b>", unsafe_allow_html=True)
 st.sidebar.markdown("<b style='color:red;'>Data Source: USGS Earthquake API</b>", unsafe_allow_html=True)
 st.sidebar.markdown("<b style='color:orange;'>Developed by: Balaji Venkatesan</b>", unsafe_allow_html=True)
+st.sidebar.markdown("[View on GitHub](https://github.com/balajiece2013-dotcom/Global-Seismic-Trends-Project)")
+
 
 
 st.header("📊 Year & Country Analysis")
