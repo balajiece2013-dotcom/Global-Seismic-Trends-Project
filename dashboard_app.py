@@ -8,11 +8,12 @@ df["year"] = df["time"].dt.year.astype(int)
 df["month"] = df["time"].dt.month
 df["country"] = df["place"].str.extract(r",\s*([A-Za-z\s]+)$")
 
-st.sidebar.title("Project Info")
-st.sidebar.write("Global Seismic Trends Dashboard")
-st.sidebar.write("Built with Python, Pandas, SQL, Streamlit")
-st.sidebar.write("Data Source: USGS Earthquake API")
-st.sidebar.write("Developed by: Balaji Venkatesan")
+st.sidebar.markdown("<h2 style='color:blue;'>Project Info</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<b style='color:green;'>Global Seismic Trends Dashboard</b>", unsafe_allow_html=True)
+st.sidebar.markdown("<b style='color:purple;'>Built with Python, Pandas, SQL, Streamlit</b>", unsafe_allow_html=True)
+st.sidebar.markdown("<b style='color:red;'>Data Source: USGS Earthquake API</b>", unsafe_allow_html=True)
+st.sidebar.markdown("<b style='color:orange;'>Developed by: Balaji Venkatesan</b>", unsafe_allow_html=True)
+
 
 st.header("📊 Year & Country Analysis")
 
