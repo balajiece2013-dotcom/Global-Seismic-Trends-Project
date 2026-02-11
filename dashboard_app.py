@@ -8,7 +8,7 @@ df["year"] = df["time"].dt.year.astype(int)
 df["month"] = df["time"].dt.month
 df["country"] = df["place"].str.extract(r",\s*([A-Za-z\s]+)$")
 
-st.title("🌍 Global Seismic Trends Dashboard")
+st.title("Global Seismic Trends Dashboard")
 
 st.header("📊 Year & Country Analysis")
 
