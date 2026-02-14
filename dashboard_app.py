@@ -239,6 +239,30 @@ task = st.selectbox("Select Query", list(queries.keys()))
 
 if st.button("Run Query"):
     query = queries[task]
-    df_result = pd.read_sql(query, engine)
-    st.subheader(f"Results for: {task}")
-    st.dataframe(df_result, width='stretch')
+    try:
+        df_result = pd.read_sql(query, engine)
+
+        if df_result.empty:
+            st.warning("No results found for this query.")
+        else:
+            st.subheader(f"Results for: {task}")
+            st.write(f"Returned {len(df_result)} rows")
+            st.dataframe(df_result, use_container_width=True)
+
+            # Show SQL query
+            with st.expander("Show SQL Query"):
+                st.code(query, language="sql")
+
+            # Download option
+            csv = df_result.to_csv(index=False).encode('utf-8')
+            st.download_button("Download Results as CSV", csv, "query_results.csv", "text/csv")
+
+            # Optional quick chart
+            numeric_cols = df_result.select_dtypes(include='number').columns
+            if len(numeric_cols) >= 2:
+                st.subheader("Quick Visualization")
+                st.line_chart(df_result[numeric_cols])
+
+    except Exception as e:
+        st.error(f"Error running query: {e}")
+
