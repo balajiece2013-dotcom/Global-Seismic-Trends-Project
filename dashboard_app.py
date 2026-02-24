@@ -42,7 +42,7 @@ else:
 from sqlalchemy import create_engine
 
 # Step 1: MySQL connection
-engine = create_engine("mysql+pymysql://root:12345@localhost/earthquakes")
+engine = create_engine("mysql+pymysql://root:Balaji%4012345@localhost/earthquakes")
 
 # Step 2: Queries dictionary (30 queries)
 queries = {
@@ -265,4 +265,3 @@ if st.button("Run Query"):
 
     except Exception as e:
         st.error(f"Error running query: {e}")
-

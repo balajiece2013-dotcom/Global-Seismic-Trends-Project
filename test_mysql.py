@@ -7,7 +7,7 @@ def test_mysql_connection():
         conn = pymysql.connect(
             host="localhost",       # MySQL server host
             user="root",            # MySQL username
-            password="12345",       # Your actual MySQL password
+            password="Balaji@12345",# Your actual MySQL password
             database="earthquakes"  # Database name
         )
 

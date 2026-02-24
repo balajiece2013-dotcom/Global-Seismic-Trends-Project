@@ -1,3 +1,12 @@
+#Data Cleaning (Mentor Logic)
+#Numeric Fix: Numeric columns-la NULL values-ku bathila Mean (Average) fill pannen.
+
+#Text Fix: Text columns-la NULL-ku bathila 'Unknown' nu replace pannen.
+
+#Regex: place column-la irunthu country name-ai extract pannen.
+
+
+
 import pandas as pd
 
 # Step 1: Load raw 5-year earthquake dataset

@@ -1,3 +1,10 @@
+#Data Collection (API)
+#Source: USGS Public API.
+
+#Method: Python requests library use panni year-by-year data fetch pannen.
+
+#Storage: Pandas DataFrame-ah convert panni process pannen.
+
 import requests
 import pandas as pd
 from datetime import datetime
