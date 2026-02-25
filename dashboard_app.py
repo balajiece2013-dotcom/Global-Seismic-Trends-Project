@@ -1,51 +1,93 @@
-import streamlit as st
-import pandas as pd
+import streamlit as st  # Streamlit library for building interactive web apps
+import pandas as pd  # Pandas for data manipulation
 
-# Load cleaned dataset
+# -------------------------------
+# 📂 Load Cleaned Dataset
+# -------------------------------
+
+# Load cleaned earthquake dataset generated after preprocessing
 df = pd.read_csv("earthquake_clean.csv")
+
+# Convert 'time' column to datetime format for time-based analysis
 df["time"] = pd.to_datetime(df["time"], errors="coerce")
+
+# Extract year and month for filtering & visualization
 df["year"] = df["time"].dt.year.astype(int)
 df["month"] = df["time"].dt.month
+
+# Extract country from 'place' column using regex
 df["country"] = df["place"].str.extract(r",\s*([A-Za-z\s]+)$")
 
+# -------------------------------
+# 📌 Sidebar Project Information
+# -------------------------------
+
+# Display styled project info in sidebar
 st.sidebar.markdown("<h2 style='color:blue;'>Project Info</h2>", unsafe_allow_html=True)
 st.sidebar.markdown("<b style='color:green;'>Global Seismic Trends Dashboard</b>", unsafe_allow_html=True)
 st.sidebar.markdown("<b style='color:purple;'>Built with Python, Pandas, SQL, Streamlit</b>", unsafe_allow_html=True)
 st.sidebar.markdown("<b style='color:red;'>Data Source: USGS Earthquake API</b>", unsafe_allow_html=True)
 st.sidebar.markdown("<b style='color:orange;'>Developed by: Balaji Venkatesan</b>", unsafe_allow_html=True)
+
+# GitHub repository link
 st.sidebar.markdown("[View on GitHub](https://github.com/balajiece2013-dotcom/Global-Seismic-Trends-Project)")
 
-
+# -------------------------------
+# 📊 Year & Country Filtering Section
+# -------------------------------
 
 st.header("📊 Year & Country Analysis")
 
+# Dropdown selection for year
 year = st.selectbox("Select Year", sorted(df["year"].unique()))
+
+# Dropdown selection for country
 country = st.selectbox("Select Country", sorted(df["country"].dropna().unique()))
 
+# Filter dataset based on selected year and country
 filtered = df[(df["year"] == year) & (df["country"] == country)]
 
+# If no data found
 if filtered.empty:
     st.warning("No earthquake records found for this selection.")
 else:
+    # Display earthquake locations on map
     st.subheader("Earthquake Locations")
     st.map(filtered[["latitude", "longitude"]])
 
+    # Monthly earthquake frequency (Bar chart)
     st.subheader("Monthly Earthquake Count")
     st.bar_chart(filtered["month"].value_counts().sort_index())
 
+    # Average magnitude trend per month (Line chart)
     st.subheader("Average Magnitude by Month")
     st.line_chart(filtered.groupby("month")["mag"].mean())
 
+    # Depth vs Magnitude relationship (Scatter plot)
     st.subheader("Depth vs Magnitude")
     st.scatter_chart(filtered[["depth_km", "mag"]])
 
-from sqlalchemy import create_engine
+# -------------------------------
+# 🗄️ SQL Integration Section
+# -------------------------------
 
-# Step 1: MySQL connection
+from sqlalchemy import create_engine  # Used to connect Python with MySQL
+
+# Establish MySQL database connection
+# mysql+pymysql → database driver
+# root → username
+# Balaji%4012345 → encoded password (@ → %40)
+# earthquakes → database name
 engine = create_engine("mysql+pymysql://root:Balaji%4012345@localhost/earthquakes")
 
-# Step 2: Queries dictionary (30 queries)
+# -------------------------------
+# 📑 SQL Query Dictionary (30 Analytical Queries)
+# -------------------------------
+
+# Dictionary storing predefined analytical SQL queries
+# These queries perform time, magnitude, depth, country, tsunami, and signal analysis
 queries = {
+
     # Time Analysis
     "1. Year with most earthquakes": """
         SELECT year, COUNT(*) AS total 
@@ -233,35 +275,44 @@ queries = {
 
 # Step 3: Streamlit UI
 
+# -------------------------------
+# 🖥️ SQL Query Explorer UI
+# -------------------------------
+
 st.header("🗂️ SQL Query Explorer")  
 
+# Dropdown to select query from dictionary
 task = st.selectbox("Select Query", list(queries.keys()))
 
+# Execute selected query when button is clicked
 if st.button("Run Query"):
     query = queries[task]
     try:
+        # Execute SQL query and load result into DataFrame
         df_result = pd.read_sql(query, engine)
 
         if df_result.empty:
             st.warning("No results found for this query.")
         else:
+            # Display query result
             st.subheader(f"Results for: {task}")
             st.write(f"Returned {len(df_result)} rows")
             st.dataframe(df_result, use_container_width=True)
 
-            # Show SQL query
+            # Expandable section to display actual SQL query
             with st.expander("Show SQL Query"):
                 st.code(query, language="sql")
 
-            # Download option
+            # Allow user to download query results as CSV
             csv = df_result.to_csv(index=False).encode('utf-8')
             st.download_button("Download Results as CSV", csv, "query_results.csv", "text/csv")
 
-            # Optional quick chart
+            # Quick visualization if at least 2 numeric columns exist
             numeric_cols = df_result.select_dtypes(include='number').columns
             if len(numeric_cols) >= 2:
                 st.subheader("Quick Visualization")
                 st.line_chart(df_result[numeric_cols])
 
     except Exception as e:
+        # Error handling for SQL execution
         st.error(f"Error running query: {e}")

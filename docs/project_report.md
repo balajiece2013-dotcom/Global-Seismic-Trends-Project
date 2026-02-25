@@ -1,66 +1,122 @@
--- Global Seismic Trends – Project Report
+🌍 Global Seismic Trends Dashboard
+Project Report
+1️⃣ Introduction
 
-Introduction
-In this project, we collected earthquake data from the USGS API for the past 5 years (2020–2025).
-We cleaned the data, stored it in a MySQL database, ran SQL queries, and built a Streamlit dashboard.
-The dataset contains 32 columns (26 original + 6 derived).
+This project focuses on analyzing global earthquake patterns over the past five years (2020–2025) using real-time seismic data obtained from the USGS API.
 
-Key Findings
-Time Analysis
-The year with the highest number of earthquakes → 2021
+The complete data pipeline includes:
 
-The month with the highest number of earthquakes → March
+Fetching earthquake data from API
 
-The weekday with the most earthquakes → Friday
+Data cleaning and preprocessing using Python
 
-Magnitude Analysis
-Top 10 strongest earthquakes occurred mostly in Japan, Chile, and Indonesia
+Handling missing values using statistical imputation
 
-Average magnitude was highest in 2022
+Creating derived analytical features
 
-Destructive earthquakes (magnitude ≥ 7.5) were concentrated in the Pacific Ring of Fire
+Storing processed data into a MySQL database
 
-Depth Analysis
-Shallow earthquakes (<50 km) were more destructive
+Executing 30 analytical SQL queries
 
-Deep earthquakes (>50 km) had moderate magnitudes
+Developing an interactive Streamlit dashboard
 
-Tsunami Analysis
-Tsunami-related earthquakes were most common in Japan, Indonesia, and Chile
+The final dataset consists of 32 columns:
 
-Tsunami earthquakes had higher average magnitudes compared to non-tsunami events
+26 original attributes from the API
 
-Country Trends
-Country with the most earthquakes → Japan
+6 derived analytical columns (year, month, depth category, magnitude category, etc.)
 
-Top 5 countries by average magnitude → Japan, Chile, Indonesia, Mexico, Turkey
+This project demonstrates end-to-end data engineering, SQL analytics, and dashboard visualization skills.
 
-Countries with the most destructive earthquakes → Japan and Chile
+2️⃣ Key Findings
+📅 Time-Based Analysis
 
-Recommendations
-Governments should focus disaster planning on shallow, destructive earthquakes.
+The year with the highest number of recorded earthquakes was 2021.
 
-Insurance companies can use magnitude and depth trends for risk assessment.
+The month with the highest earthquake occurrence was March.
 
-Researchers should study tsunami-linked earthquakes for coastal safety.
+Friday recorded the highest number of earthquakes among all weekdays.
 
-Public awareness campaigns should encourage earthquake preparedness drills.
+These results indicate temporal patterns in seismic activity that can support time-based trend analysis.
 
-Conclusion
-This project successfully completed the full workflow:
+📊 Magnitude Analysis
 
-Fetching data from API
+The top 10 strongest earthquakes were primarily recorded in Japan, Chile, and Indonesia.
 
-Cleaning and transforming data
+The highest average earthquake magnitude was observed in 2022.
 
-Inserting into MySQL database
+Most destructive earthquakes (magnitude ≥ 7.5) were concentrated around the Pacific Ring of Fire region.
 
-Running 30 SQL queries
+This confirms that tectonically active regions experience higher seismic intensity.
 
-Building a Streamlit dashboard
+🌊 Depth Analysis
 
-Writing documentation
+Shallow earthquakes (<50 km) were found to be more destructive.
 
-The project requirements are fully satisfied
+Deep earthquakes (>50 km) generally showed moderate magnitudes.
 
-Project finalized and ready for GitHub submission.
+Shallow earthquakes cause stronger surface shaking, leading to greater structural damage.
+
+🌊 Tsunami Analysis
+
+Tsunami-triggering earthquakes were most common in Japan, Indonesia, and Chile.
+
+Earthquakes associated with tsunamis had a higher average magnitude compared to non-tsunami earthquakes.
+
+This highlights the strong relationship between high-magnitude undersea earthquakes and tsunami risk.
+
+🌍 Country-Based Trends
+
+The country with the highest number of recorded earthquakes was Japan.
+
+Top 5 countries based on average magnitude:
+
+Japan
+
+Chile
+
+Indonesia
+
+Mexico
+
+Turkey
+
+Countries with the highest number of destructive earthquakes:
+
+Japan
+
+Chile
+
+These findings emphasize high-risk seismic zones globally.
+
+3️⃣ Recommendations
+
+Based on the analysis, the following recommendations are proposed:
+
+Governments should prioritize disaster preparedness strategies for shallow, high-magnitude earthquakes.
+
+Insurance companies can leverage depth and magnitude trends for better risk modeling and premium estimation.
+
+Coastal safety authorities should focus on monitoring tsunami-linked seismic events.
+
+Public awareness programs should promote earthquake preparedness drills and emergency response training.
+
+4️⃣ Conclusion
+
+This project successfully implemented a complete end-to-end data workflow:
+
+Data collection from API
+
+Data cleaning and feature engineering
+
+Secure MySQL database integration
+
+Execution of 30 analytical SQL queries
+
+Interactive Streamlit dashboard development
+
+Comprehensive documentation
+
+All project objectives and technical requirements have been fully satisfied.
+
+The project is finalized and ready for GitHub submission and evaluation.
